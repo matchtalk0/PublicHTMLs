@@ -1302,7 +1302,7 @@ function sendHeight() {
   parent.postMessage({
     type: "resize-iframe",
     height: height
-  }, "https://WordPress側のドメイン.example.com");
+  }, "*");
 }
 
 window.addEventListener("load", sendHeight);
