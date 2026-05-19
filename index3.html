@@ -1298,6 +1298,9 @@ h1,
 })();
 
 function sendHeight() {
+if(document.documentElement.scrollHeight < 2000) {
+  return;
+}
   const height = document.documentElement.scrollHeight;
   parent.postMessage({
     type: "resize-iframe",
