@@ -259,8 +259,8 @@ a{color:var(--accent);overflow-wrap:anywhere;}
   <main id="editorMode" class="app">
     <header class="hero">
       <h1>Markdownから閲覧用サイトを作成</h1>
-      <p>視覚的に見やすい閲覧用サイトのダウンロード・共有が簡単にできます。<br>indexeddbにサイト内容を保存して、2回目以降の通信量を削減するバージョンは<a href="https://matchtalk0.github.io/PublicHTMLs/ShareDocumentSite.html">こちら</a></p>
-      <button id="helpSiteButton" class="help-site-button" type="button">説明サイトを見る</button>
+      <p>視覚的に見やすい閲覧用サイトのダウンロード・共有が簡単にできます。</p><div hidden>
+      <button id="helpSiteButton" class="help-site-button" type="button">説明サイトを見る</button></div>
     </header>
 
     <section class="panel editor-panel" aria-labelledby="editorTitle">
@@ -453,7 +453,7 @@ async function initApp() {
     const viewerQrCode = document.getElementById("viewerQrCode");
     const viewerQrStatus = document.getElementById("viewerQrStatus");
     const QR_CODE_SCRIPT_URL = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
-    const QR_CODE_URL_BASE = "https://uni928.github.io/Uni928PublicHTMLs/index80.html";
+    const QR_CODE_URL_BASE = "https://matchtalk0.github.io/PublicHTMLs/ShareDocumentSite.html";
     let qrCodePluginPromise = null;
     const titleInput = document.getElementById("pageTitle");
     const sourceText = document.getElementById("sourceText");
@@ -500,7 +500,7 @@ async function initApp() {
     const DISCORD_BASE64_LIMIT = 1920;
     const URL_BASE64_LIMIT = 10000;
     const PACKED_SAVE_BASE64_LIMIT = 1000000;
-    const LONG_URL_BASE = "https://uni928.github.io/Uni928PublicHTMLs/index80.html";
+    const LONG_URL_BASE = "https://matchtalk0.github.io/PublicHTMLs/ShareDocumentSite.html";
     const URL_SHARE_BASE = "https://uni928.github.io/ShareURL/?url=";
     const URL_COMPRESSION_FORMATS = [
       { format: "brotli", hashKey: "br" },
@@ -508,9 +508,9 @@ async function initApp() {
       { format: "gzip", hashKey: "gz" }
     ];
     const LEGACY_URL_HASH_KEY = "saved";
-    const EDITOR_TRANSFER_STORAGE_KEY = "uni928-index80-editor-transfer-v1";
-    const VIEWER_FONT_STORAGE_PREFIX = "uni928-index80-viewer-fonts-v1:";
-    const PASSWORD_DB_NAME = "uni928-index80-passwords-v1";
+    const EDITOR_TRANSFER_STORAGE_KEY = "matchtalk0-editor-transfer-v1";
+    const VIEWER_FONT_STORAGE_PREFIX = "matchtalk0-viewer-fonts-v1:";
+    const PASSWORD_DB_NAME = "matchtalk0-passwords-v1";
     const PASSWORD_STORE_NAME = "passwords";
     const PASSWORD_KDF_ITERATIONS = 200000;
     const compressionSteps = [
@@ -1665,7 +1665,7 @@ async function initApp() {
 
     function makeEncryptedHtml(encoded, compressed, format) {
       return '<!doctype html><meta charset="utf-8"><title>パスワード保護されたHTML</title><body><p id="m">保護されたデータを開いています…</p><script>' +
-        'const E=' + JSON.stringify(encoded) + ',C=' + JSON.stringify(Boolean(compressed)) + ',F=' + JSON.stringify(format || "") + ',D="uni928-index80-passwords-v1",S="passwords",I=200000;' +
+        'const E=' + JSON.stringify(encoded) + ',C=' + JSON.stringify(Boolean(compressed)) + ',F=' + JSON.stringify(format || "") + ',D="matchtalk0-passwords-v1",S="passwords",I=200000;' +
         'const b64u=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");s+="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob(s),c=>c.charCodeAt(0))},u=b=>{let x="";for(let i=0;i<b.length;i+=32768)x+=String.fromCharCode(...b.subarray(i,i+32768));return btoa(x).replace(/\\+/g,"-").replace(/\\//g,"_").replace(/=+$/g,"")};' +
         'const parse=e=>{let p=b64u(e);if(p.length<46||p[0]!==1)throw Error("暗号化データの形式が正しくありません。");return{id:u(p.slice(1,17)),salt:p.slice(17,33),iv:p.slice(33,45),data:p.slice(45)}};' +
         'const db=()=>new Promise((r,j)=>{let q=indexedDB.open(D,1);q.onupgradeneeded=()=>{let d=q.result;if(!d.objectStoreNames.contains(S))d.createObjectStore(S,{keyPath:"id"})};q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});' +
